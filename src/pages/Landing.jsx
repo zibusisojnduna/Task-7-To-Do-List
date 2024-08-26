@@ -1,18 +1,22 @@
 import React from "react";
+import Nav from "../components/nav";
+import { Link } from "react-router-dom";
 
 function Landing(){
    return(
     <section>
-        <div style={{display:"flex"}}>
-            <button>Login</button><br></br>
-            <button>Sign Up</button>
-        </div>
+      
 
         <div>
-            <h1>Welcome to <h1 style={{color:"blue"}}>Equilibrium</h1></h1>
+            <h1>Welcome to <h2 style={{color:"blue"}}>Equilibrium</h2></h1>
             <p>Let's complete the day together, one task at a time.</p>
 
-            <img></img>
+            <img src={require("../assets/vector-inside-office-illustration.jpg")}></img>
+        </div>
+    
+        <div style={{display:"flex", marginLeft:"10%"}}>
+            <button style={{backgroundColor:"blue", margin:"2%", color:"white"}}><Link to={"./LogIn"}/>Login</button><br></br>
+            <button style={{backgroundColor:"white"}}><Link to={"./SignUp"}/>Sign Up</button>
         </div>
 
         
