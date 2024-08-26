@@ -1,8 +1,25 @@
-# React + Vite
+<img src="https://socialify.git.ci/zibusisojnduna/Task-7-To-Do-List/image?language=1&name=1&owner=1&pattern=Brick%20Wall&stargazers=1&theme=Dark" alt="Task-7-To-Do-List" width="640" height="320" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1>Task 7: To Do List</h1>
 
-Currently, two official plugins are available:
+<p>This is a task that deals with making an active to do list.</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run Locally
+Clone the project
+```bash
+  git clone https://github.com/zibusisojnduna/Task-7-To-Do-List
+```
+Go to the project directory
+```bash
+  cd Task-7-To-Do-List
+```
+Install dependencies
+```bash
+  npm install
+```
+Start the react server
+```bash
+  npm run start
+```
+## Tech Stack
+**Client:** React JS, HTML5, JavaScript, CSS3
