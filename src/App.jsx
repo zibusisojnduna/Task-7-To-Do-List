@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout/>}/>
         <Route index element={<Landing/>}/>
-        <Route path='/Login' element={<LogIn/>}/>
+        <Route path='/LogIn' element={<LogIn/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
         <Route path='/Todo' element={<Todo/>}/>
         <Route path='/Settings' element={<Settings/>}/>
