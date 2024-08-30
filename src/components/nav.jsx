@@ -8,7 +8,7 @@ function Nav(){
     return(
         <div style={{display:"flex",}}>
             <Link to={"/Todo"}><IoHome /></Link><br></br>
-            <Link to={"/"}><FaPlus /></Link><br></br>
+            <Link to={""}><FaPlus /></Link><br></br>
             <Link to={"/Settings"}><FaGear /></Link><br></br>
         </div>
     )

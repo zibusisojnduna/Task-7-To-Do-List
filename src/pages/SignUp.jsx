@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/w3.css"
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import Nav from "../components/nav";
+
 
 function SignUp(){
     return(
@@ -24,7 +24,7 @@ function SignUp(){
 
 
 
-            <Nav/>
+            
         </section>
     )
 }
