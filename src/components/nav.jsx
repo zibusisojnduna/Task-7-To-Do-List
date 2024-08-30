@@ -7,9 +7,9 @@ import { FaGear } from "react-icons/fa6";
 function Nav(){
     return(
         <div style={{display:"flex",}}>
-            <Link to={"/Todo"}><IoHome /></Link>
-            <Link to={"/"}><FaPlus /></Link>
-            <Link to={"/Settings"}><FaGear /></Link>
+            <Link to={"/Todo"}><IoHome /></Link><br></br>
+            <Link to={"/"}><FaPlus /></Link><br></br>
+            <Link to={"/Settings"}><FaGear /></Link><br></br>
         </div>
     )
 }
