@@ -10,10 +10,13 @@ import Settings from './pages/Settings'
 import SignUp from './pages/SignUp'
 import Todo from './pages/Todo'
 
+import axios from 'axios';
+
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <BrowserRouter>
@@ -28,5 +31,6 @@ function App() {
     </BrowserRouter>
   )
 }
+
 
 export default App
