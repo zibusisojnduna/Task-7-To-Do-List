@@ -9,7 +9,6 @@ import LogIn from './pages/LogIn'
 import Settings from './pages/Settings'
 import SignUp from './pages/SignUp'
 import Todo from './pages/Todo'
-
 import axios from 'axios';
 
 

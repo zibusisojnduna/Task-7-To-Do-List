@@ -9,12 +9,12 @@ app.use(express.json())
 app.use(morgan("tiny"))
 
 //Create users
-// const createTable = () => {
-//     const sql = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL)"
-//     db.prepare(sql).run();
-// }
+const createTable = () => {
+    const sql = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL)"
+    db.prepare(sql).run();
+}
 
-// createTable()
+createTable()
 
 //Create todos
 const createTodos = () => {
@@ -26,12 +26,12 @@ createTodos()
 
 //Insert User
 
-// app.post("/users", (req, res) => {
-//     const {name, email, password} = req.body
-//     const sql = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)"
-//     const info = db.prepare(sql).run(name, email, password)
-//     res.status(201).json({id: info.lastInsertRowid})
-// })
+app.post("/users", (req, res) => {
+    const {name, email, password} = req.body
+    const sql = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)"
+    const info = db.prepare(sql).run(name, email, password)
+    res.status(201).json({id: info.lastInsertRowid})
+})
 
 //Insert Todo
 app.post("/todos", (req, res) => {
@@ -43,50 +43,94 @@ app.post("/todos", (req, res) => {
 
 
 //Get all users
-// app.get("/users", (req, res) => {
-//     const sql ="SELECT * FROM user"
-//     const rows = db.prepare(sql).all()
-//     res.json(rows)
-// })
+app.get("/users", (req, res) => {
+    const sql ="SELECT * FROM user"
+    const rows = db.prepare(sql).all()
+    res.json(rows)
+})
+
+//Get all todos
+app.get("/todos", (req, res) => {
+    const sql = "SELECT * FROM todo"
+    const rows = db.prepare(sql).all()
+    res.json(rows)
+})
 
 //Get a user by id
-// app.get("/users/:id", (req, res) => {
-//     const { id } = req.params
-//     const sql = "SELECT * FROM user WHERE id = ?"
-//     const row = db.prepare(sql).get(id)
-//     if(row) {
-//         res.json(row)
-//     } else {
-//         res.status(404).json({error: "User not found"})
-//     }
-// })
+app.get("/users/:id", (req, res) => {
+    const { id } = req.params
+    const sql = "SELECT * FROM user WHERE id = ?"
+    const row = db.prepare(sql).get(id)
+    if(row) {
+        res.json(row)
+    } else {
+        res.status(404).json({error: "User not found"})
+    }
+})
+
+//Get a todo by id
+app.get("/todos/:id", (req, res) => {
+    const { id } = req.params
+    const sql = "SELECT * FROM todo WHERE id = ?"
+    const row = db.prepare(sql).get(id)
+    if (row) {
+        res.json(row)
+    } else {
+        res.status(404).json({error: "Todo not found"})
+    }
+})
  
 
 //Update a user by id
-// app.put("/users/:id", (req, res) => {
-// const { id } = req.params
-// const {name, email, password} = req.body
-// const sql = "UPDATE user SET name = ?, email = ?, password = ? WHERE id = ?"
-// const info = db.prepare(sql).run(name, email, password, id)
-// if (info.changes > 0) {
-//     res.json({message: "User updated sucessfully."})
-// } else {
-//     res.status(404).json({error: "User not found"})
-// }
-// })
+app.put("/users/:id", (req, res) => {
+const { id } = req.params
+const {name, email, password} = req.body
+const sql = "UPDATE user SET name = ?, email = ?, password = ? WHERE id = ?"
+const info = db.prepare(sql).run(name, email, password, id)
+if (info.changes > 0) {
+    res.json({message: "User updated sucessfully."})
+} else {
+    res.status(404).json({error: "User not found"})
+}
+})
+
+//Update a todo by id
+app.put("/todos/:id", (req, res) => {
+const { id } = req.params
+const {name, priority, progress} = req.body
+const sql = "UPDATE todo SET name = ?, priority = ?, progress = ? WHERE id = ?"
+const info = db.prepare(sql).run(name, priority, progress, id)
+if (info.changes > 0) {
+    res.json({message: "Todo updated successfully"})
+} else {
+    res.status(404).json({error: "Todo not found"})
+}
+})
 
 //Delete a user by id
-// app.delete("/users/:id", (req, res) => {
-//     const { id } = req.params
-//     const sql = "DELETE FROM user WHERE id = ?"
-//     const info = db.prepare(sql).run(id)
-//     if (info.changes > 0) {
-//         res.json({message: "User deleted successfully"})
-//     } else{
-//         res.status(404).json({error: "User not found"})
-//     }
-//     }
-// )
+app.delete("/users/:id", (req, res) => {
+    const { id } = req.params
+    const sql = "DELETE FROM user WHERE id = ?"
+    const info = db.prepare(sql).run(id)
+    if (info.changes > 0) {
+        res.json({message: "User deleted successfully"})
+    } else{
+        res.status(404).json({error: "User not found"})
+    }
+    }
+)
+
+//Delete a todo by id
+app.delete("/todos/:id", (req, res) => {
+    const { id } = req.params
+    const sql = "DELETE FROM todo WHERE id = ?"
+    const info = db.prepare(sql).run(id)
+    if (info.changes > 0) {
+        res.json({message: "Todo deleted seccessfully"})
+    } else {
+        res.status(404).json({error: "Todo not found"})
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:3001`)
