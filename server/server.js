@@ -1,0 +1,93 @@
+const express = require("express")
+const cors = require("cors")
+const morgan = require("morgan")
+const db = require("better-sqlite3")("database.db")
+const app = express()
+const port = 3001
+app.use(cors())
+app.use(express.json())
+app.use(morgan("tiny"))
+
+//Create users
+// const createTable = () => {
+//     const sql = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL)"
+//     db.prepare(sql).run();
+// }
+
+// createTable()
+
+//Create todos
+const createTodos = () => {
+    const sql = "CREATE TABLE IF NOT EXISTS todo (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, priority TEXT NOT NULL, progress TEXT NOT NULL)"
+    db.prepare(sql).run()
+}
+
+createTodos()
+
+//Insert User
+
+// app.post("/users", (req, res) => {
+//     const {name, email, password} = req.body
+//     const sql = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)"
+//     const info = db.prepare(sql).run(name, email, password)
+//     res.status(201).json({id: info.lastInsertRowid})
+// })
+
+//Insert Todo
+app.post("/todos", (req, res) => {
+    const {name, priority, progress} = req.body
+    const sql = "INSERT INTO todo (name, priority, progress) VALUES (?, ?, ?)"
+    const info = db.prepare(sql).run(name, priority, progress)
+    res.status(201).json({id: info.lastInsertRowid})
+})
+
+
+//Get all users
+// app.get("/users", (req, res) => {
+//     const sql ="SELECT * FROM user"
+//     const rows = db.prepare(sql).all()
+//     res.json(rows)
+// })
+
+//Get a user by id
+// app.get("/users/:id", (req, res) => {
+//     const { id } = req.params
+//     const sql = "SELECT * FROM user WHERE id = ?"
+//     const row = db.prepare(sql).get(id)
+//     if(row) {
+//         res.json(row)
+//     } else {
+//         res.status(404).json({error: "User not found"})
+//     }
+// })
+ 
+
+//Update a user by id
+// app.put("/users/:id", (req, res) => {
+// const { id } = req.params
+// const {name, email, password} = req.body
+// const sql = "UPDATE user SET name = ?, email = ?, password = ? WHERE id = ?"
+// const info = db.prepare(sql).run(name, email, password, id)
+// if (info.changes > 0) {
+//     res.json({message: "User updated sucessfully."})
+// } else {
+//     res.status(404).json({error: "User not found"})
+// }
+// })
+
+//Delete a user by id
+// app.delete("/users/:id", (req, res) => {
+//     const { id } = req.params
+//     const sql = "DELETE FROM user WHERE id = ?"
+//     const info = db.prepare(sql).run(id)
+//     if (info.changes > 0) {
+//         res.json({message: "User deleted successfully"})
+//     } else{
+//         res.status(404).json({error: "User not found"})
+//     }
+//     }
+// )
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:3001`)
+})
