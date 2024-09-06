@@ -9,7 +9,6 @@ function Layout(){
         
             <Outlet/>
             <Nav/>
-            <Footer/>
         </>
        
 

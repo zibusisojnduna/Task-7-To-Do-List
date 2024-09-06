@@ -20,12 +20,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout/>}/>
+        <Route path='/' element={<Layout/>}>
         <Route index element={<Landing/>}/>
         <Route path='/LogIn' element={<LogIn/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
         <Route path='/Todo' element={<Todo/>}/>
         <Route path='/Settings' element={<Settings/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   )
