@@ -12,7 +12,7 @@ function Nav(){
             </div>
 
             <div style={{paddingTop:"90%"}}>
-                <Link to={""}><FaPlus /></Link><br></br>
+                <Link to={"/"}><FaPlus /></Link><br></br>
             </div>
           
             <div style={{paddingLeft:"90%", paddingTop:"90%"}}>
