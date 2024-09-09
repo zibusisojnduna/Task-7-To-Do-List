@@ -11,7 +11,7 @@ function Todo(){
             </div><br></br>
 
             <div>
-                <h1 style={{color:"grey"}}>No Todo's added</h1>
+                <h1>No Todo's added</h1>
             </div> 
         </section>
         

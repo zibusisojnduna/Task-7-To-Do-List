@@ -11,18 +11,18 @@ app.use(morgan("tiny"))
 //Create users
 const createTable = () => {
     const sql = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL)"
-    db.prepare(sql).run();
+    db.prepare(sql).run()
 }
 
 createTable()
 
 //Create todos
-const createTodos = () => {
-    const sql = "CREATE TABLE IF NOT EXISTS todo (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, priority TEXT NOT NULL, progress TEXT NOT NULL)"
-    db.prepare(sql).run()
-}
+// const createTodos = () => {
+//     const sql = "CREATE TABLE IF NOT EXISTS todo (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, priority TEXT NOT NULL, progress TEXT NOT NULL)"
+//     db.prepare(sql).run()
+// }
 
-createTodos()
+// createTodos()
 
 //Insert User
 
@@ -133,6 +133,18 @@ app.delete("/todos/:id", (req, res) => {
 })
 
 //Signup  route
+app.post("/validatePassword", (req, res) => {
+    const {name, password} = req.body
+    db.all(`SELECT * FROM database WHERE name = "${name}" and password = "${password}" `)
+    if (err){
+        throw err 
+    }
+    if(rows.length > 0){
+        res.send({validation: true})
+    }else{
+        res.send({validation: false})
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:3001`)

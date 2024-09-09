@@ -37,7 +37,7 @@ function SignUp(){
                 </div>
 
             <form onSubmit={handleSubmit}>
-                <input className="w3-input" type="text" placeholder="Full Name" style={{width:"200%"}} value={formData.name} onChange={handleChange} required></input>
+                <input className="w3-input" type="text" placeholder="Enter Username" style={{width:"200%"}} value={formData.name} onChange={handleChange} required></input>
                 <input className="w3-input" type="text" placeholder="Email Address" style={{width:"200%"}} value={formData.email} onChange={handleChange} required></input>
                 <input className="w3-input" type="password" placeholder="Enter Password" style={{width:"200%"}} value={formData.password} onChange={handleChange} required></input><br></br>
                 <button className="w3-btn w3-blue w3-border" style={{width:"200%"}}><Link to={"/Todo"} className="w3-text-white" style={{margin:"10%"}} >Sign Up</Link></button>
