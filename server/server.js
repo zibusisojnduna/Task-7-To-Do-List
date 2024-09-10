@@ -133,43 +133,43 @@ app.delete("/todos/:id", (req, res) => {
 })
 
 //Signup  route
-app.post("/validatePassword", (req, res) => {
-    const {name, password} = req.body
-    db.all(`SELECT * FROM database WHERE name = "${name}" and password = "${password}" `)
-    if (err){
-        throw err 
-    }
-    if(rows.length > 0){
-        res.send({validation: true})
-    }else{
-        res.send({validation: false})
-    }
-})
+// app.post("/signup", (req,res) => {
+//     const {name, email, password} = req.body
 
+//     const salt = bcrypt.genSaltSync(10)
+//     const hashedPassword = bcrypt.hashedSync (password, salt)
+
+//     db.run("INSERT INTO user (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword], function (err) {
+//         if (err){
+//             return res.status(400).json({message: "Error registering user"})
+//         }
+//         res.status(201).json({message: "User registerd sucessfully"})
+//     })
+// })
 
 
 //Login
-app.post("/login", (req, res) => {
-    const {name, password} = req.body
+// app.post("/login", (req, res) => {
+//     const {name, password} = req.body
 
-    db.get("SELECT * FROM user WHERE name = ?", [name], (err, user) => {
-        if (err) {
-            return res.status(500).json({message:"Database error"})
-        }
-        if(!user){
-            return res.status(400).json({message: "Invalid username or password"})
-        }
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) {
-            return res.status(500).json({message: "Error comparring password"})
-        }
-        if (!isMatch) {
-            return res.status(400).json({message: "Invalid username or password"})
-        }
+//     db.get("SELECT * FROM user WHERE name = ?", [name], (err, user) => {
+//         if (err) {
+//             return res.status(500).json({message:"Database error"})
+//         }
+//         if(!user){
+//             return res.status(400).json({message: "Invalid username or password"})
+//         }
+//     bcrypt.compare(password, user.password, (err, isMatch) => {
+//         if (err) {
+//             return res.status(500).json({message: "Error comparring password"})
+//         }
+//         if (!isMatch) {
+//             return res.status(400).json({message: "Invalid username or password"})
+//         }
       
-    })
-    })
-})
+//     })
+//     })
+// })
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:3001`)

@@ -7,7 +7,7 @@ import axios from "axios";
 
 function SignUp(){
    const [email, setEmail] = useState()
-   const [username, Setusername] = useState()
+   const [username, setUsername] = useState()
    const [password, setPassword] = useState()
    const [confirmPassword, setConfirmPassword] = useState()
    const [error, setError] = useState()
@@ -23,20 +23,16 @@ function SignUp(){
         setLoading(false)
         return
     }
-    
-}
-// try{
-//     const response = await axios.post("http//localhost:3001/signup", {username, email, password})
-//     console.log(response.data)
-// } catch (error) {
-//     setError("Error registering user")
-// }finally {
-//     setLoading(false)
-// }
+    try{
+        const response = await axios.post("http//localhost:3001/signup", {username, email, password})
+        console.log(response.data)
+    } catch (error) {
+        setError("Error registering user")
 
-  
-    
-    
+    } finally{
+        setLoading(false)
+    }
+}
     
 
 
@@ -49,9 +45,10 @@ function SignUp(){
                 </div>
 
             <form onSubmit={handleSubmit}>
-                <input className="w3-input" type="text" placeholder="Enter Username" style={{width:"200%"}} value={formData.name} onChange={handleChange} required></input>
-                <input className="w3-input" type="text" placeholder="Email Address" style={{width:"200%"}} value={formData.email} onChange={handleChange} required></input>
-                <input className="w3-input" type="password" placeholder="Enter Password" style={{width:"200%"}} value={formData.password} onChange={handleChange} required></input><br></br>
+                <input className="w3-input" type="text" placeholder="Enter Username" style={{width:"200%"}} value={username} onChange={(e) => setUsername(e.target.value)} required></input>
+                <input className="w3-input" type="text" placeholder="Email Address" style={{width:"200%"}} value={email} onChange={(e) => setEmail(e.target.value)}  required></input>
+                <input className="w3-input" type="password" placeholder="Enter Password" style={{width:"200%"}} value={password} onChange={(e) => setPassword(e.target.value)} required></input>
+                <input className="w3-input" type="password" placeholder="Confirm Password" style={{width:"200%"}} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required></input><br></br>
                 <button className="w3-btn w3-blue w3-border" style={{width:"200%"}}><Link to={"/Todo"} className="w3-text-white" style={{margin:"10%"}} >Sign Up</Link></button>
             </form>
            
