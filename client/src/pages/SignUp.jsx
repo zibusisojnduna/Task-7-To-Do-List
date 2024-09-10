@@ -6,23 +6,35 @@ import axios from "axios";
 
 
 function SignUp(){
-    const [formData, setFormData] = useState({})
+   const [email, setEmail] = useState()
+   const [username, Setusername] = useState()
+   const [password, setPassword] = useState()
+   const [confirmPassword, setConfirmPassword] = useState()
+   const [error, setError] = useState()
+   const [loading, setLoading] = useState(false)
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
+   const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const response = await axios.post("http://localhost:5000/users", error)
-        } catch (error) {
-            console.error("There was an error!", error)
-        }
+    if (password !== confirmPassword){
+        setError("Passwords do not match")
+        setLoading(false)
+        return
     }
+    
+}
+// try{
+//     const response = await axios.post("http//localhost:3001/signup", {username, email, password})
+//     console.log(response.data)
+// } catch (error) {
+//     setError("Error registering user")
+// }finally {
+//     setLoading(false)
+// }
+
+  
     
     
     

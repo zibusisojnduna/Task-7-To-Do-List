@@ -146,6 +146,31 @@ app.post("/validatePassword", (req, res) => {
     }
 })
 
+
+
+//Login
+app.post("/login", (req, res) => {
+    const {name, password} = req.body
+
+    db.get("SELECT * FROM user WHERE name = ?", [name], (err, user) => {
+        if (err) {
+            return res.status(500).json({message:"Database error"})
+        }
+        if(!user){
+            return res.status(400).json({message: "Invalid username or password"})
+        }
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+            return res.status(500).json({message: "Error comparring password"})
+        }
+        if (!isMatch) {
+            return res.status(400).json({message: "Invalid username or password"})
+        }
+      
+    })
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:3001`)
 })
