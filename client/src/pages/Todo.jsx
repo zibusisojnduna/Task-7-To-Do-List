@@ -5,12 +5,22 @@ import { useState } from "react";
 
 function Todo(){
     
-
     
+
     return(
-        <div>
-            <Overlay/>
-        </div>
+        <section>
+            <div style={{}}>
+                <input type="text" placeholder="Search" style={{width:"200%"}}></input> 
+                
+            </div><br></br>
+
+            <div>
+                <h1>No Todo's added</h1>
+                <button className="w3-btn w3-blue w3-border">Add Todo</button>
+            
+            </div> 
+        </section>
+        
 
        
     )
