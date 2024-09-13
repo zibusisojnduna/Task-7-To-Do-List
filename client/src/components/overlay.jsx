@@ -1,24 +1,64 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import { response } from "express";
 
-const Overlay = ({isVisible, onClose}) => {
-    if (!isVisible) return null
+function Overlay(){
+    const [todos, setTodos] = useState([])
+    const [newTodo, setNewTodo] = useState()
 
-    return(
-        <div style={{position:"fixed", top:"0", left:"0", right:"0", bottom:"0", background:"rgb(129, 218, 227)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:"1000"}}>
-            <div style={{background:"white", padding:"5%", borderRadius:"5%", position:"relative"}}>
-                <div>
-                    <h1>Create Task</h1>
-                    <input type="text" placeholder="Task Name" className="w3-input"></input>
-                    <select>
-                        <option>---Priority---</option>
-                        <option value={high}>High Priority</option>
-                        <option value={medium}>Medium Priority</option>
-                        <option value={low}>Low Priority</option>
-                    </select>
-                </div>
-            </div>
-            <button style={{position:"absolute", top:"5%", right:"5%", background:"green", color:"white", border:"none", borderRadius:"25%", cursor:"pointer"}} onClick={{onClose}}>Confrim</button>
-        </div>
-    )
+    useEffect(() => {
+        axios.get(`http//localhost:3001/todos`)
+        .then(response => {
+            setTodos(response.data.slice(0, 10))//Displays on the first 10
+        })
+        .catch(error => console.error("Error fetching todos.", error))
+    }, [])
+
+    const handleAddTodo = () => {
+        if (newTodo.trim()) {
+            const todo = {
+                userId:1,
+                id:todos.length + 1,
+                title:newTodo,
+                completed:false
+            }
+            //Add new todo to the API
+            axios.post(`http//localhost:3001/todos`, todo)
+            .then( response => {
+                setTodos([...todos, response.data])
+                setNewTodo()
+            })
+            .catch(error => console.error("Error adding todo", error))
+        }
+    }
+    const handleDeleteTodo = (id) => {
+    //Delete todo from API
+    axios.delete(`http//localhost:3001/todos/${id}`)
+    .then(() => {
+        setTodos(todos.filter(todo => todo.id !== id))
+    })
+    .catch(error => console.error("Error deleting todo", error))
+
+    
 }
+
+return(
+    <div>
+        <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} placeholder="Add new todo"></input>
+        <button onClick={handleAddTodo}>Add Todo</button>
+
+        <ul>
+            {todos.map(todo => (
+                <li key={todo.id}>{todo.title}<button onClick={() => handleDeleteTodo(todo.id)}>Delete</button></li>
+                
+            ))}
+        </ul>
+    </div>
+
+    
+)
+    
+}
+
+
 export default Overlay
