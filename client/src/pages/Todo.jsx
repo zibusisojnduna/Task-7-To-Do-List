@@ -5,18 +5,22 @@ import { useState } from "react";
 
 function Todo(){
     
-    
+    const [isOverlayOpen, setOverlayOpen] = useState(false)
+
+    const openOverlay = () => setOverlayOpen (true)
+    const closeOverlay = () => setOverlayOpen (false)
 
     return(
         <section>
-            <div style={{}}>
+            <div>
                 <input type="text" placeholder="Search" style={{width:"200%"}}></input> 
                 
             </div><br></br>
 
             <div>
                 <h1>No Todo's added</h1>
-                <button className="w3-btn w3-blue w3-border">Add Todo</button>
+                <button className="w3-btn w3-blue w3-border" onClick={openOverlay}>Add Todo</button>
+                <Overlay isOpen={isOverlayOpen} onClose={closeOverlay}/>
             
             </div> 
         </section>
